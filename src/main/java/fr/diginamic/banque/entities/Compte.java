@@ -1,5 +1,6 @@
 package fr.diginamic.banque.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -17,15 +18,17 @@ public class Compte {
 
 	@Column(name = "SOLDE", nullable = false)
 	private Double solde;
-	
+
 	@ManyToMany(mappedBy = "comptes")
 	private Set<Client> clients;
-	
+
 	@OneToMany(mappedBy = "compte")
 	private Set<Operation> operations;
 
 	public Compte() {
 		// TODO Auto-generated constructor stub
+		this.clients = new HashSet<>();
+		this.operations = new HashSet<>();
 	}
 
 	public Integer getId() {
@@ -50,6 +53,22 @@ public class Compte {
 
 	public void setSolde(Double solde) {
 		this.solde = solde;
+	}
+
+	public Set<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(Set<Client> clients) {
+		this.clients = clients;
+	}
+
+	public Set<Operation> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(Set<Operation> operations) {
+		this.operations = operations;
 	}
 
 	@Override

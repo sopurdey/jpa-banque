@@ -1,6 +1,7 @@
 package fr.diginamic.banque.entities;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -23,20 +24,21 @@ public class Client {
 	@Column(name = "DATE_NAISSANCE", nullable = false)
 	private Date dateNaissance;
 
+	@Embedded
+	private Adresse adresse;
+
 	@ManyToOne
 	@JoinColumn(name = "BANQUE_ID")
 	private Banque banque;
 
-	// ClientB est maître dans la relation ClientB/Compte
+	// Client est maître dans la relation Client/Compte
 	@ManyToMany
 	@JoinTable(name = "CLI_CPT", joinColumns = @JoinColumn(name = "ID_CLI", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_CPT", referencedColumnName = "ID"))
 	private Set<Compte> comptes;
 
-	@Embedded
-	private Adresse adresse;
-
 	public Client() {
 		// TODO Auto-generated constructor stub
+		this.comptes = new HashSet<>();
 	}
 
 	public Integer getId() {
@@ -79,10 +81,25 @@ public class Client {
 		this.adresse = adresse;
 	}
 
+	public Banque getBanque() {
+		return banque;
+	}
+
+	public void setBanque(Banque banque) {
+		this.banque = banque;
+	}
+
+	public Set<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(Set<Compte> comptes) {
+		this.comptes = comptes;
+	}
+
 	@Override
 	public String toString() {
-		return "ClientBanque [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
-				+ "]";
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + "]";
 	}
 
 }
