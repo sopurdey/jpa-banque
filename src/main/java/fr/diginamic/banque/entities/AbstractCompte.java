@@ -6,8 +6,9 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "compte")
-public class Compte {
+public abstract class AbstractCompte {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,7 @@ public class Compte {
 	@OneToMany(mappedBy = "compte")
 	private Set<Operation> operations;
 
-	public Compte() {
+	public AbstractCompte() {
 		// TODO Auto-generated constructor stub
 		this.clients = new HashSet<>();
 		this.operations = new HashSet<>();

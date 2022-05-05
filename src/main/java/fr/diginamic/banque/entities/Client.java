@@ -34,11 +34,11 @@ public class Client {
 	// Client est maître dans la relation Client/Compte
 	@ManyToMany
 	@JoinTable(name = "CLI_CPT", joinColumns = @JoinColumn(name = "ID_CLI", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_CPT", referencedColumnName = "ID"))
-	private Set<Compte> comptes;
+	private Set<AbstractCompte> abstractComptes;
 
 	public Client() {
 		// TODO Auto-generated constructor stub
-		this.comptes = new HashSet<>();
+		this.abstractComptes = new HashSet<>();
 	}
 
 	public Integer getId() {
@@ -89,12 +89,12 @@ public class Client {
 		this.banque = banque;
 	}
 
-	public Set<Compte> getComptes() {
-		return comptes;
+	public Set<AbstractCompte> getComptes() {
+		return abstractComptes;
 	}
 
-	public void setComptes(Set<Compte> comptes) {
-		this.comptes = comptes;
+	public void setComptes(Set<AbstractCompte> abstractComptes) {
+		this.abstractComptes = abstractComptes;
 	}
 
 	@Override

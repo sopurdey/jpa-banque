@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE")
 @Table(name = "operation")
 public class Operation {
 
@@ -24,7 +26,7 @@ public class Operation {
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_CPT")
-	private Compte compte;
+	private AbstractCompte abstractCompte;
 
 	public Operation() {
 		// TODO Auto-generated constructor stub
