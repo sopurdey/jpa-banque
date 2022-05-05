@@ -64,6 +64,14 @@ public class Operation {
 		this.motif = motif;
 	}
 
+	public AbstractCompte getAbstractCompte() {
+		return abstractCompte;
+	}
+
+	public void setAbstractCompte(AbstractCompte abstractCompte) {
+		this.abstractCompte = abstractCompte;
+	}
+
 	@Override
 	public String toString() {
 		return "Operation [id=" + id + ", date=" + date + ", montant=" + montant + ", motif=" + motif + "]";
