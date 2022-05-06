@@ -1,28 +1,34 @@
 package fr.diginamic.banque.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("AssuranceVie")
 public class AssuranceVie extends AbstractCompte {
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "DATE_FIN")
-	private Date dateFin;
-	
+	private LocalDate dateFin;
+
 	@Column(name = "TAUX")
 	private Double taux;
-	
+
 	public AssuranceVie() {
 		super();
 	}
 
-	public Date getDateFin() {
+	public AssuranceVie(String numero, Double solde, LocalDate dateFin, Double taux) {
+		super(numero, solde);
+		this.dateFin = dateFin;
+		this.taux = taux;
+	}
+
+	public LocalDate getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
 	}
 
@@ -35,7 +41,14 @@ public class AssuranceVie extends AbstractCompte {
 	}
 
 	@Override
-	public String toString() {
-		return "AssuranceVie [dateFin=" + dateFin + ", taux=" + taux + "]";
+	public String getType() {
+		return "AssuranceVie";
 	}
+
+	@Override
+	public String toString() {
+		return "AssuranceVie id=" + getId() + ", numero=" + getNumero() + ", solde=" + getSolde() + "€ dateFin="
+				+ dateFin + ", taux=" + taux + "%";
+	}
+
 }

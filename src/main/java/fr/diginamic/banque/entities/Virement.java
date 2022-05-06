@@ -1,5 +1,8 @@
 package fr.diginamic.banque.entities;
 
+
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +14,11 @@ public class Virement extends Operation {
 
 	public Virement() {
 		super();
+	}
+
+	public Virement(LocalDateTime date, Double montant, String motif, AbstractCompte abstractCompte, String beneficiaire) {
+		super(date, montant, motif, abstractCompte);
+		this.beneficiaire = beneficiaire;
 	}
 
 	public String getBeneficiaire() {

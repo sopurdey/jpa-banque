@@ -6,7 +6,8 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE")
 @Table(name = "compte")
 public abstract class AbstractCompte {
 
@@ -20,16 +21,22 @@ public abstract class AbstractCompte {
 	@Column(name = "SOLDE", nullable = false)
 	private Double solde;
 
-	@ManyToMany(mappedBy = "comptes")
+	@ManyToMany(mappedBy = "abstractComptes", cascade = CascadeType.PERSIST)
 	private Set<Client> clients;
-
-	@OneToMany(mappedBy = "compte")
-	private Set<Operation> operations;
+	/*
+	 * @OneToMany(mappedBy = "compte") private Set<Operation> operations;
+	 */
 
 	public AbstractCompte() {
 		// TODO Auto-generated constructor stub
 		this.clients = new HashSet<>();
-		this.operations = new HashSet<>();
+		// this.operations = new HashSet<>();
+	}
+
+	public AbstractCompte(String numero, Double solde) {
+		super();
+		this.numero = numero;
+		this.solde = solde;
 	}
 
 	public Integer getId() {
@@ -64,17 +71,13 @@ public abstract class AbstractCompte {
 		this.clients = clients;
 	}
 
-	public Set<Operation> getOperations() {
-		return operations;
-	}
+	/*
+	 * public Set<Operation> getOperations() { return operations; }
+	 * 
+	 * public void setOperations(Set<Operation> operations) { this.operations =
+	 * operations; }
+	 */
 
-	public void setOperations(Set<Operation> operations) {
-		this.operations = operations;
-	}
-
-	@Override
-	public String toString() {
-		return "Compte [id=" + id + ", numero=" + numero + ", solde=" + solde + "]";
-	}
+	public abstract String getType();
 
 }

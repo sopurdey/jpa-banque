@@ -44,7 +44,6 @@ public class OperationDao extends Dao implements Idao<Operation> {
 				etrans.setDate(e.getDate());
 				etrans.setMontant(e.getMontant());
 				etrans.setMotif(e.getMotif());
-				etrans.setAbstractCompte(e.getAbstractCompte());
 				em.merge(etrans);
 				em.getTransaction().commit();
 				return true;

@@ -1,6 +1,6 @@
 package fr.diginamic.banque.entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -14,9 +14,8 @@ public class Operation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DATE", nullable = false)
-	private Date date;
+	private LocalDateTime date;
 
 	@Column(name = "MONTANT")
 	private Double montant;
@@ -32,6 +31,13 @@ public class Operation {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Operation(LocalDateTime date, Double montant, String motif, AbstractCompte abstractCompte) {
+		this.date = date;
+		this.montant = montant;
+		this.motif = motif;
+		this.abstractCompte = abstractCompte;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -40,11 +46,11 @@ public class Operation {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 

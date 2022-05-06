@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import fr.diginamic.banque.dao.Idao;
+import fr.diginamic.banque.entities.Client;
 import fr.diginamic.banque.entities.LivretA;
+import fr.diginamic.banque.entities.Operation;
 
 public class LivretADao extends Dao implements Idao<LivretA> {
 
@@ -44,7 +46,6 @@ public class LivretADao extends Dao implements Idao<LivretA> {
 				etrans.setNumero(e.getNumero());
 				etrans.setSolde(e.getSolde());
 				etrans.setClients(e.getClients());
-				etrans.setOperations(e.getOperations());
 				etrans.setTaux(e.getTaux());
 				em.merge(etrans);
 				em.getTransaction().commit();
@@ -96,5 +97,7 @@ public class LivretADao extends Dao implements Idao<LivretA> {
 
 		return tqb.getResultList();
 	}
+
+
 
 }

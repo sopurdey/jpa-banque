@@ -7,6 +7,8 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.banque.dao.Idao;
 import fr.diginamic.banque.entities.AssuranceVie;
+import fr.diginamic.banque.entities.Client;
+import fr.diginamic.banque.entities.Operation;
 
 public class AssuranceVieDao extends Dao implements Idao<AssuranceVie> {
 
@@ -43,8 +45,7 @@ public class AssuranceVieDao extends Dao implements Idao<AssuranceVie> {
 			if (etrans != null) {
 				etrans.setNumero(e.getNumero());
 				etrans.setSolde(e.getSolde());
-				etrans.setClients(e.getClients());
-				etrans.setOperations(e.getOperations());
+				//etrans.setClients(e.getClients());
 				etrans.setDateFin(e.getDateFin());
 				etrans.setTaux(e.getTaux());
 				em.merge(etrans);
@@ -96,6 +97,20 @@ public class AssuranceVieDao extends Dao implements Idao<AssuranceVie> {
 		// TODO Auto-generated method stub
 		TypedQuery<AssuranceVie> tqb = fd.getEm().createQuery("SELECT av FROM AssuranceVie av", AssuranceVie.class);
 
+		return tqb.getResultList();
+	}
+	
+	public List<Operation> getOperations(AssuranceVie e) throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<Operation> tqb = fd.getEm().createNamedQuery("(AbstractCompte.getOperations", Operation.class);
+		tqb.setParameter("Operation", e);
+		return tqb.getResultList();
+	}
+	
+	public List<Client> getClients(AssuranceVie e) throws Exception {
+		// TODO Auto-generated method stub
+		TypedQuery<Client> tqb = fd.getEm().createNamedQuery("(AbstractCompte.getClients", Client.class);
+		tqb.setParameter("Client", e);
 		return tqb.getResultList();
 	}
 

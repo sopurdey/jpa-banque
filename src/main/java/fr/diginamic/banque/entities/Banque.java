@@ -28,6 +28,11 @@ public class Banque {
 		return id;
 	}
 
+	public Banque(String nom) {
+		this.nom = nom;
+		this.clients = new HashSet<>();
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}

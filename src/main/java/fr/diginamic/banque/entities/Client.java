@@ -1,6 +1,6 @@
 package fr.diginamic.banque.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,9 +20,8 @@ public class Client {
 	@Column(name = "PRENOM", length = 50, nullable = false)
 	private String prenom;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "DATE_NAISSANCE", nullable = false)
-	private Date dateNaissance;
+	private LocalDate dateNaissance;
 
 	@Embedded
 	private Adresse adresse;
@@ -32,12 +31,22 @@ public class Client {
 	private Banque banque;
 
 	// Client est maître dans la relation Client/Compte
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "CLI_CPT", joinColumns = @JoinColumn(name = "ID_CLI", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_CPT", referencedColumnName = "ID"))
 	private Set<AbstractCompte> abstractComptes;
 
 	public Client() {
 		// TODO Auto-generated constructor stub
+		this.abstractComptes = new HashSet<>();
+	}
+
+	public Client(String nom, String prenom, LocalDate dateNaissance, Adresse adresse, Banque banque) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
+		this.banque = banque;
 		this.abstractComptes = new HashSet<>();
 	}
 
@@ -65,11 +74,11 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public Date getDateNaissance() {
+	public LocalDate getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(LocalDate dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 

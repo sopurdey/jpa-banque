@@ -44,7 +44,6 @@ public class VirementDao extends Dao implements Idao<Virement> {
 				etrans.setDate(e.getDate());
 				etrans.setMontant(e.getMontant());
 				etrans.setMotif(e.getMotif());
-				etrans.setAbstractCompte(e.getAbstractCompte());
 				etrans.setBeneficiaire(e.getBeneficiaire());
 				em.merge(etrans);
 				em.getTransaction().commit();

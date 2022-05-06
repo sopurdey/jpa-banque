@@ -86,7 +86,7 @@ public class ClientDao extends Dao implements Idao<Client> {
 	public Client getOne(Client e) throws Exception {
 		// TODO Auto-generated method stub
 		TypedQuery<Client> tqb = fd.getEm().createQuery("SELECT c FROM Client c WHERE c.id = :id", Client.class);
-		tqb.setParameter("id", e.getId());
+		tqb.setParameter("client", e);
 
 		return tqb.getResultList().get(0);
 	}
