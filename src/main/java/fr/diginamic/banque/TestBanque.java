@@ -1,17 +1,22 @@
 package fr.diginamic.banque;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import fr.diginamic.banque.dao.impl.AssuranceVieDao;
 import fr.diginamic.banque.dao.impl.BanqueDao;
 import fr.diginamic.banque.dao.impl.ClientDao;
 import fr.diginamic.banque.dao.impl.FactoryDao;
 import fr.diginamic.banque.dao.impl.LivretADao;
+import fr.diginamic.banque.dao.impl.OperationDao;
+import fr.diginamic.banque.dao.impl.VirementDao;
 import fr.diginamic.banque.entities.Adresse;
 import fr.diginamic.banque.entities.AssuranceVie;
 import fr.diginamic.banque.entities.Banque;
 import fr.diginamic.banque.entities.Client;
 import fr.diginamic.banque.entities.LivretA;
+import fr.diginamic.banque.entities.Operation;
+import fr.diginamic.banque.entities.Virement;
 
 public class TestBanque {
 
@@ -27,6 +32,8 @@ public class TestBanque {
 			ClientDao cdo = new ClientDao(TestBanque.BANQUE);
 			LivretADao lado = new LivretADao(TestBanque.BANQUE);
 			AssuranceVieDao avdo = new AssuranceVieDao(TestBanque.BANQUE);
+			VirementDao vdo = new VirementDao(TestBanque.BANQUE);
+			OperationDao odo = new OperationDao(TestBanque.BANQUE);
 
 			// Création d'une banque
 			Banque boe = new Banque("Bank of England");
@@ -81,9 +88,16 @@ public class TestBanque {
 			System.out.println(pierre + " - " + pierre.getComptes());
 
 			/* Insérer des opérations de type virements sur un compte */
-			
+			Virement vir = new Virement(LocalDateTime.of(2022, 3, 13, 9, 30), 100.00, "Remboursement", la, "joe");
+			vir.setAbstractCompte(cpt1);
+			vdo.add(vir);
+					
 			/* Insérer des opérations de type opérations sur un compte*/
-
+			Operation ope1 = new Operation(LocalDateTime.of(2022, 3, 2, 11, 15), 150.00, "Facture no. 123", la);
+			Operation ope2 = new Operation(LocalDateTime.of(2022, 3, 9, 15, 22), 75.00, "Facture no. 456", la);
+			odo.add(ope1);
+			odo.add(ope2);
+			
 		} catch (Exception ex) {
 			System.err.println(ex.getMessage());
 		}

@@ -6,9 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import fr.diginamic.banque.dao.Idao;
-import fr.diginamic.banque.entities.Client;
 import fr.diginamic.banque.entities.LivretA;
-import fr.diginamic.banque.entities.Operation;
 
 public class LivretADao extends Dao implements Idao<LivretA> {
 
